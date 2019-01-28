@@ -1,9 +1,9 @@
 /**
  * Created by guycohen on 18/05/2017.
  */
-package com.facebook.presto.s2.geometry.functions;
+package io.prestosql.s2.geometry.functions;
 
-import com.facebook.presto.spi.Plugin;
+import io.prestosql.spi.Plugin;
 import com.google.common.collect.ImmutableSet;
 
 import java.util.Set;

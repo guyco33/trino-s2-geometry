@@ -1,16 +1,8 @@
 /**
  * Created by guycohen on 18/05/2017.
  */
-import com.facebook.presto.s2.geometry.functions.S2GeometryFunctions;
-import com.facebook.presto.s2.geometry.functions.S2Helper;
+import io.prestosql.s2.geometry.functions.S2Helper;
 import com.google.common.geometry.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
-import static java.lang.Math.toIntExact;
 
 public class Test {
 

@@ -1,4 +1,4 @@
-package com.facebook.presto.s2.geometry.functions;
+package io.prestosql.s2.geometry.functions;
 
 import com.google.common.geometry.*;
 

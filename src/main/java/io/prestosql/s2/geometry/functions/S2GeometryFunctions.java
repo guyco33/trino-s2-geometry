@@ -1,26 +1,25 @@
-package com.facebook.presto.s2.geometry.functions;
+package io.prestosql.s2.geometry.functions;
 
 /**
  * Created by guycohen on 18/05/2017.
  */
-import com.facebook.presto.spi.block.*;
-import com.facebook.presto.spi.function.ScalarFunction;
-import com.facebook.presto.spi.function.Description;
-import com.facebook.presto.spi.function.SqlNullable;
-import com.facebook.presto.spi.function.SqlType;
-import com.facebook.presto.spi.type.*;
+import io.prestosql.spi.block.*;
+import io.prestosql.spi.function.ScalarFunction;
+import io.prestosql.spi.function.Description;
+import io.prestosql.spi.function.SqlNullable;
+import io.prestosql.spi.function.SqlType;
+import io.prestosql.spi.type.*;
 import com.google.common.geometry.*;
 
-import com.sun.tools.corba.se.idl.toJavaPortable.Helper;
 import io.airlift.slice.Slice;
 
 import java.util.List;
 import java.util.ArrayList;
 
 
-import static com.facebook.presto.s2.geometry.functions.S2Helper.parseWktPolygon;
-import static com.facebook.presto.spi.type.VarcharType.VARCHAR;
-import static com.facebook.presto.spi.type.DoubleType.DOUBLE;
+import static io.prestosql.s2.geometry.functions.S2Helper.parseWktPolygon;
+import static io.prestosql.spi.type.VarcharType.VARCHAR;
+import static io.prestosql.spi.type.DoubleType.DOUBLE;
 
 import static io.airlift.slice.Slices.utf8Slice;
 import static java.lang.Math.toIntExact;
