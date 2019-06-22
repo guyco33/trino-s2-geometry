@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -11,9 +11,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="io.airlift:slice:0.9" level="project" />
-    <orderEntry type="library" exported="" name="com.google.guava:guava:18.0" level="project" />
-    <orderEntry type="library" exported="" name="org.isuper:s2-geometry-library-java:0.0.1" level="project" />
-    <orderEntry type="library" name="io.prestosql:presto-spi:300" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
+    <orderEntry type="library" name="Maven: org.isuper:s2-geometry-library-java:0.0.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.airlift:slice:0.9" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.prestosql:presto-spi:315" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.airlift:units:1.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.8" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.openjdk.jol:jol-core:0.2" level="project" />
   </component>
 </module>
