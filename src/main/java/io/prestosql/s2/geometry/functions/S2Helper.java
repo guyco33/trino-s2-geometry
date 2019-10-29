@@ -1,14 +1,9 @@
 package io.prestosql.s2.geometry.functions;
 
 import com.google.common.geometry.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.lang.Math.toIntExact;
-import static java.util.regex.Pattern.matches;
 
 /**
  * Created by guycohen on 14/06/2017.
@@ -16,29 +11,23 @@ import static java.util.regex.Pattern.matches;
 public class S2Helper {
 
     public static S2Polygon parseWktPolygon(String polygon) {
-        String coord = "[-]?[0-9]+[.]?[-]?[0-9]+";
-        String spaces = "(\\s)+";
-        String ospaces = "(\\s)*";
-        String point = ospaces+coord+spaces+coord+ospaces;
+        String start_pattern = "^(\\s)*[Pp][Oo][Ll][Yy][Gg][Oo][Nn](\\s)*[(](\\s)*[(]";
+        String end_pattern = "[)](\\s)*[)](\\s)*$";
 
-        String pattern = "POLYGON[(][(]"+point+"(,"+point+"){2,}?[)][)]";
-        polygon = polygon.toUpperCase();
-        Boolean match = Pattern.matches(pattern, polygon);
-        if (match) {
-            ArrayList<S2Point> points = new ArrayList<S2Point>();
-            String[] items = Pattern.compile(ospaces+","+ospaces).split(polygon.replace("POLYGON((","").replace("))",""));
-            for (String item: items) {
-                String[] nums = item.trim().split(spaces);
-                points.add(S2LatLng.fromDegrees(Double.parseDouble(nums[1]), Double.parseDouble(nums[0])).toPoint());
-            }
-            S2Loop loop = new S2Loop(points);
-            S2PolygonBuilder polyBuilder = new S2PolygonBuilder();
-            polyBuilder.addLoop(loop);
-            return polyBuilder.assemblePolygon();
-        }
-        else {
+        if (!Pattern.matches(start_pattern+"[0-9.,\\-\\s\\t]+"+end_pattern, polygon)) {
             return new S2Polygon();
         }
+
+        ArrayList<S2Point> points = new ArrayList<S2Point>();
+        String[] items = polygon.replaceAll(start_pattern,"").replaceAll(end_pattern,"").split(",");
+        for (String item: items) {
+            String[] nums = item.trim().split("(\\s)+");
+            points.add(S2LatLng.fromDegrees(Double.parseDouble(nums[1]), Double.parseDouble(nums[0])).toPoint());
+        }
+        S2Loop loop = new S2Loop(points);
+        S2PolygonBuilder polyBuilder = new S2PolygonBuilder();
+        polyBuilder.addLoop(loop);
+        return polyBuilder.assemblePolygon();
     }
 
     public static S2CellUnion cover(S2Polygon polygon, int minLevel, int maxLevel) {
