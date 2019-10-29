@@ -14,20 +14,25 @@ public class S2Helper {
         String start_pattern = "^(\\s)*[Pp][Oo][Ll][Yy][Gg][Oo][Nn](\\s)*[(](\\s)*[(]";
         String end_pattern = "[)](\\s)*[)](\\s)*$";
 
-        if (!Pattern.matches(start_pattern+"[0-9.,\\-\\s\\t]+"+end_pattern, polygon)) {
+        try {
+            if (!Pattern.matches(start_pattern+"[0-9.,\\-\\s\\t]+"+end_pattern, polygon)) {
+                return new S2Polygon();
+            }
+
+            ArrayList<S2Point> points = new ArrayList<S2Point>();
+            String[] items = polygon.replaceAll(start_pattern,"").replaceAll(end_pattern,"").split(",");
+            for (String item: items) {
+                String[] nums = item.trim().split("(\\s)+");
+                points.add(S2LatLng.fromDegrees(Double.parseDouble(nums[1]), Double.parseDouble(nums[0])).toPoint());
+            }
+            S2Loop loop = new S2Loop(points);
+            S2PolygonBuilder polyBuilder = new S2PolygonBuilder();
+            polyBuilder.addLoop(loop);
+            return polyBuilder.assemblePolygon();
+        }
+        catch (Exception e) {
             return new S2Polygon();
         }
-
-        ArrayList<S2Point> points = new ArrayList<S2Point>();
-        String[] items = polygon.replaceAll(start_pattern,"").replaceAll(end_pattern,"").split(",");
-        for (String item: items) {
-            String[] nums = item.trim().split("(\\s)+");
-            points.add(S2LatLng.fromDegrees(Double.parseDouble(nums[1]), Double.parseDouble(nums[0])).toPoint());
-        }
-        S2Loop loop = new S2Loop(points);
-        S2PolygonBuilder polyBuilder = new S2PolygonBuilder();
-        polyBuilder.addLoop(loop);
-        return polyBuilder.assemblePolygon();
     }
 
     public static S2CellUnion cover(S2Polygon polygon, int minLevel, int maxLevel) {
