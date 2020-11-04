@@ -55,8 +55,9 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>29.0-jre</version>
         </dependency>
+
         <dependency>
             <groupId>org.isuper</groupId>
             <artifactId>s2-geometry-library-java</artifactId>
@@ -66,14 +67,14 @@
         <dependency>
             <groupId>io.airlift</groupId>
             <artifactId>slice</artifactId>
-            <version>0.9</version>
+            <version>0.40</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>io.prestosql</groupId>
             <artifactId>presto-spi</artifactId>
-            <version>315</version>
+            <version>345</version>
             <scope>provided</scope>
         </dependency>
 
