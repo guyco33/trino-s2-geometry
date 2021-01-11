@@ -1,9 +1,9 @@
 /**
  * Created by guycohen on 18/05/2017.
  */
-package io.prestosql.s2.geometry.functions;
+package io.trino.s2.geometry.functions;
 
-import io.prestosql.spi.Plugin;
+import io.trino.spi.Plugin;
 import com.google.common.collect.ImmutableSet;
 
 import java.util.Set;

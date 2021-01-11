@@ -1,14 +1,14 @@
-package io.prestosql.s2.geometry.functions;
+package io.trino.s2.geometry.functions;
 
 /**
  * Created by guycohen on 18/05/2017.
  */
-import io.prestosql.spi.block.*;
-import io.prestosql.spi.function.ScalarFunction;
-import io.prestosql.spi.function.Description;
-import io.prestosql.spi.function.SqlNullable;
-import io.prestosql.spi.function.SqlType;
-import io.prestosql.spi.type.*;
+import io.trino.spi.block.*;
+import io.trino.spi.function.ScalarFunction;
+import io.trino.spi.function.Description;
+import io.trino.spi.function.SqlNullable;
+import io.trino.spi.function.SqlType;
+import io.trino.spi.type.*;
 import com.google.common.geometry.*;
 
 import io.airlift.slice.Slice;
@@ -17,9 +17,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-import static io.prestosql.s2.geometry.functions.S2Helper.parseWktPolygon;
-import static io.prestosql.spi.type.VarcharType.VARCHAR;
-import static io.prestosql.spi.type.DoubleType.DOUBLE;
+import static io.trino.spi.type.VarcharType.VARCHAR;
+import static io.trino.spi.type.DoubleType.DOUBLE;
 
 import static io.airlift.slice.Slices.utf8Slice;
 import static java.lang.Math.toIntExact;
@@ -181,7 +180,7 @@ public class S2GeometryFunctions {
         if (min_level<0 || min_level>30) return null;
         if (max_level<0 || max_level>30) return null;
 
-        S2CellUnion cover = S2Helper.cover(parseWktPolygon(wktPolygon.toStringUtf8()),toIntExact(min_level),toIntExact(max_level));
+        S2CellUnion cover = S2Helper.cover(S2Helper.parseWktPolygon(wktPolygon.toStringUtf8()),toIntExact(min_level),toIntExact(max_level));
         if (cover==null) return null;
         return cellsArrayBlock(cover.cellIds());
     }
@@ -210,7 +209,7 @@ public class S2GeometryFunctions {
     {
         if (level<0 || level>30) return null;
 
-        S2CellUnion cover = S2Helper.cover(parseWktPolygon(wktPolygon.toStringUtf8()), toIntExact(level));
+        S2CellUnion cover = S2Helper.cover(S2Helper.parseWktPolygon(wktPolygon.toStringUtf8()), toIntExact(level));
         if (cover==null) return false;
         S2CellId cellid = S2CellId.fromToken(celltoken.toStringUtf8());
 

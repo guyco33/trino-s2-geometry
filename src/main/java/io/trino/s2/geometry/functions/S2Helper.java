@@ -1,4 +1,4 @@
-package io.prestosql.s2.geometry.functions;
+package io.trino.s2.geometry.functions;
 
 import com.google.common.geometry.*;
 import java.util.ArrayList;
