@@ -1,4 +1,5 @@
 *.iml
 target/
 .idea
+.DS_Store
 lib/
