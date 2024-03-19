@@ -3,28 +3,29 @@ package io.trino.s2.geometry.functions;
 /**
  * Created by guycohen on 18/05/2017.
  */
-import io.trino.spi.block.*;
+import com.google.common.geometry.S1Angle;
+import com.google.common.geometry.S2Cap;
+import com.google.common.geometry.S2CellId;
+import com.google.common.geometry.S2CellUnion;
+import com.google.common.geometry.S2LatLng;
+import com.google.common.geometry.S2RegionCoverer;
+import io.trino.spi.block.Block;
+import io.trino.spi.block.BlockBuilder;
 import io.trino.spi.function.ScalarFunction;
 import io.trino.spi.function.Description;
 import io.trino.spi.function.SqlNullable;
 import io.trino.spi.function.SqlType;
-import io.trino.spi.type.*;
-import com.google.common.geometry.*;
-
 import io.airlift.slice.Slice;
-
+import io.trino.spi.type.StandardTypes;
 import java.util.List;
 import java.util.ArrayList;
 
-
 import static io.trino.spi.type.VarcharType.VARCHAR;
 import static io.trino.spi.type.DoubleType.DOUBLE;
-
 import static io.airlift.slice.Slices.utf8Slice;
 import static java.lang.Math.toIntExact;
 
 public class S2GeometryFunctions {
-
 
     private S2GeometryFunctions() {}
 
@@ -82,7 +83,7 @@ public class S2GeometryFunctions {
             @SqlType(StandardTypes.DOUBLE ) double lat,
             @SqlType(StandardTypes.DOUBLE) double lon)
     {
-        return S2CellId.fromToken(celltoken.toStringUtf8()).toLatLng().getEarthDistance(S2LatLng.fromDegrees(lat,lon));
+        return S2CellId.fromToken(celltoken.toStringUtf8()).toLatLng().getDistance(S2LatLng.fromDegrees(lat,lon)).radians() * 6371010.0;
     }
 
     @ScalarFunction("s2_centroid")
@@ -93,13 +94,10 @@ public class S2GeometryFunctions {
             @SqlType(StandardTypes.VARCHAR) Slice celltoken)
     {
         S2LatLng latlng = S2CellId.fromToken(celltoken.toStringUtf8()).toLatLng();
-//        Slice[] slicePoint = new Slice[]{ utf8Slice(Double.toString(latlng.latDegrees())),
-//                                          utf8Slice(Double.toString(latlng.lngDegrees())) };
         BlockBuilder blockBuilder = DOUBLE.createBlockBuilder(null,2);
         DOUBLE.writeDouble(blockBuilder, latlng.latDegrees());
         DOUBLE.writeDouble(blockBuilder, latlng.lngDegrees());
         return blockBuilder.build();
-        //return new SliceArrayBlock(slicePoint.length, slicePoint,true);
     }
 
     @ScalarFunction("s2_neighbours")
@@ -289,6 +287,4 @@ public class S2GeometryFunctions {
         return blockBuilder.build();
 
     }
-
-
 }

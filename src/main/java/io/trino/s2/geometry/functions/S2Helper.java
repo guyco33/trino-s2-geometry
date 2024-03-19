@@ -37,9 +37,10 @@ public class S2Helper {
 
     public static S2CellUnion cover(S2Polygon polygon, int minLevel, int maxLevel) {
         if (polygon == null || polygon.numLoops()==0) return null;
-        S2RegionCoverer coverer = new S2RegionCoverer();
-        coverer.setMinLevel(minLevel);
-        coverer.setMaxLevel(maxLevel);
+        S2RegionCoverer coverer = S2RegionCoverer.builder()
+                .setMinLevel(minLevel)
+                .setMaxLevel(maxLevel)
+                .build();
         return coverer.getCovering(polygon);
     }
 
