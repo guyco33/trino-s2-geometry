@@ -68,10 +68,9 @@ public class S2GeometryFunctions {
     @Description("Returns the level of cell token")
     @SqlType(StandardTypes.INTEGER)
     @SqlNullable
-    public static Long s2Level(
-            @SqlType(StandardTypes.VARCHAR) Slice celltoken)
-    {
-        return Long.valueOf(S2CellId.fromToken(celltoken.toStringUtf8()).level());
+    public static Long s2Level(@SqlType(StandardTypes.VARCHAR) Slice celltoken) {
+        S2CellId cellid = S2CellId.fromToken(celltoken.toStringUtf8());
+        return cellid.isValid() ? cellid.level() : -1L;
     }
 
     @ScalarFunction("s2_distance")
