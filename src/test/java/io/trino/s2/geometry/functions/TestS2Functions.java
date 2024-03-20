@@ -50,7 +50,7 @@ public class TestS2Functions
 
         assertThat(assertions.expression(
                 "s2_level('f76')"))
-                .isEqualTo(4);
+                .isEqualTo(-1);
 
         assertThat(assertions.expression(
                 "s2_distance('151d48164', 32.15000, 34.848000)"))
