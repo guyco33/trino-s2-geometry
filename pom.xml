@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>33.0.0-jre</version>
+            <version>33.1.0-jre</version>
         </dependency>
 
         <dependency>
@@ -67,14 +67,14 @@
         <dependency>
             <groupId>io.trino</groupId>
             <artifactId>trino-spi</artifactId>
-            <version>435</version>
+            <version>444</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>io.trino</groupId>
             <artifactId>trino-testing</artifactId>
-            <version>435</version>
+            <version>444</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

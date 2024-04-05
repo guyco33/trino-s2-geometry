@@ -236,8 +236,7 @@ public class S2GeometryFunctions {
         try {
             ArrayList<S2CellId> cellids = new ArrayList<S2CellId>();
             for (int i = 0; i < cellTokens.getPositionCount(); i++) {
-                cellTokens.getSliceLength(i);
-                cellids.add(S2CellId.fromToken(cellTokens.getSlice(i, 0, cellTokens.getSliceLength(i)).toStringUtf8()));
+                cellids.add(S2CellId.fromToken(VARCHAR.getSlice(cellTokens, i).toStringUtf8()));
             }
             S2CellUnion cellUnion = new S2CellUnion();
             cellUnion.initFromCellIds(cellids);
